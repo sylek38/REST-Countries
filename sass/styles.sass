@@ -1,17 +1,48 @@
 *, *::before, *::after
     margin: 0
     padding: 0
+    box-sizing: border-box
+
 
 body
     font-size: 16px
     font-family: 'Lato', sans-serif
     background-color: #F9F9FB
 
+a
+    text-decoration: none
+
 .container
     max-width: 1100px
     width: 100%
     margin: auto
     padding: 0 10px
+
+// HEADER ---
+
+.header
+    padding: 1rem 0
+    background-color: #4a53cf
+    color: white
+
+    .container
+        display: flex
+        justify-content: space-between
+        align-items: center
+
+    .link
+        padding: 1rem 2rem
+        border: 1px solid white
+        border-radius: 50px
+        color: white
+        transition: .25s
+
+        &:hover
+            background-color: white
+            color: #4a53cf
+
+
+// INPUTS ---
 
 .input-box
     display: flex
@@ -51,7 +82,7 @@ body
             background-color: white
             color:#4a53cf
             border-style: inset
-        
+
 
 
 // TABLE ---
