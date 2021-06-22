@@ -7,11 +7,11 @@ fetch(allCountries)
     data.forEach(country => {
         temp += `<tr>`;
         temp += `<td>${country.name}</td>`;
-        temp += `<td>${country.currencies.name}</td>`
-        temp += `<td>${country.languages.name}</td>`
+        temp += `<td>${country.currencies[0].name}</td>`
+        temp += `<td>${country.languages[0].name}</td>`
         temp += `<td>${country.population}</td>`
         temp += `<td>${country.area}</td>`
-        temp += `<td>${country.flag}</td>`
+        temp += `<td><img class="flag-container" src="${country.flag}"></td>`
         temp += `</tr>`;
     })
 
