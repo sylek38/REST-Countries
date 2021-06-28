@@ -22,7 +22,7 @@ a {
 }
 
 .header {
-  padding: 1rem 0;
+  padding: 2rem 0;
   background-color: #4a53cf;
   color: white;
 }
@@ -88,6 +88,7 @@ a {
 }
 
 .table {
+  min-width: 100%;
   margin: auto;
   border-collapse: collapse;
   border-radius: 8px;
@@ -125,4 +126,23 @@ a {
 .table td .flag-container img {
   width: 100%;
   height: 100%;
+}
+
+.dashboard {
+  max-width: 50%;
+  margin: auto;
+  margin-top: 3rem;
+  padding: 3rem;
+  background-color: #4a53cf;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 32px 5px rgba(0, 0, 0, 0.2);
+}
+.dashboard__header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+.dashboard__results * + * {
+  margin-top: 1rem;
+  text-align: left;
 }/*# sourceMappingURL=styles.css.map */
