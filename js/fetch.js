@@ -18,7 +18,7 @@ function displayTableValues(countries){
             <td>${displayProps(country.currencies)}</td>
             <td>${displayProps(country.languages)}</td>
             <td>${country.population.toLocaleString()}</td>
-            <td>${country.area ? country.area : '---'}</td>
+            <td>${country.area ? country.area.toLocaleString() : '---'}</td>
             <td><img class="flag-container" src="${country.flag}" alt="the flag of ${country.name}"/></td>
         </tr>`;
     })
@@ -46,17 +46,17 @@ displayProps = (countryProp) => {
 
 
 
-// // set max inp value dynamically + set min inp value
-// const populationInputs = document.querySelectorAll(".num-inp");
+// set max inp value dynamically + set min inp value
+const populationInputs = document.querySelectorAll(".num-inp");
 
-// const maxPopulationArr = [];
-// Array.from(rows).forEach(row => maxPopulationArr.push(row[3]));
+const maxPopulationArr = [];
+Array.from(rows).forEach(row => maxPopulationArr.push(row[3]));
 
 
-// populationInputs.forEach(input => {
-//     input.setAttribute("min", 0);
-//     input.setAttribute("max", Math.max(...maxPopulationArr));
-// })
+populationInputs.forEach(input => {
+    input.setAttribute("min", 0);
+    input.setAttribute("max", Math.max(...maxPopulationArr));
+})
 
 
 
