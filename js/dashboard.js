@@ -7,6 +7,7 @@ fetch(allCountries)
 function displayDashboard(countries) {
 
     const dashboard = document.querySelector(".dashboard__results");
+
     const allCountries = document.createElement("p");
     const span = document.createElement("span");
     allCountries.textContent = "Total number of countries: ";

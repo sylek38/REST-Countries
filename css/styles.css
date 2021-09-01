@@ -6,6 +6,7 @@
 
 body {
   font-size: 16px;
+  line-height: 1.6;
   font-family: "Lato", sans-serif;
   background-color: #F9F9FB;
 }
@@ -61,12 +62,6 @@ a {
 .input-box .inp {
   color: #999;
   letter-spacing: 0.25px;
-}
-.input-box .inp::-moz-placeholder {
-  color: #999;
-}
-.input-box .inp:-ms-input-placeholder {
-  color: #999;
 }
 .input-box .inp::placeholder {
   color: #999;
@@ -145,4 +140,6 @@ a {
 .dashboard__results * + * {
   margin-top: 1rem;
   text-align: left;
-}/*# sourceMappingURL=styles.css.map */
+}
+
+/*# sourceMappingURL=styles.css.map */
