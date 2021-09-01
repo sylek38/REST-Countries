@@ -82,6 +82,24 @@ a {
   border-style: inset;
 }
 
+@media (max-width: 820px) {
+  .input-box {
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    padding: 1.5rem;
+  }
+
+  .input-box * + * {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+}
+.table-outer-wrapper {
+  overflow-x: auto;
+}
+
 .table {
   min-width: 100%;
   margin: auto;
@@ -92,9 +110,10 @@ a {
 }
 .table tr, .table td {
   border-bottom: 3px solid #F9F9FB;
-}
-.table tr, .table td {
   padding: 0.75rem;
+}
+.table th, .table td {
+  min-width: 5rem;
 }
 .table th {
   padding: 1rem;
