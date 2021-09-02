@@ -2,76 +2,124 @@
 const allCountries = "https://restcountries.eu/rest/v2/all";
 
 fetch(allCountries)
-.then(res => res.json())
-.then(data => displayTableValues(data))
+    .then(res => res.json())
+    .then(data => displayTableValues(data))
 
 const rows = document.querySelector('tbody').children;
 
-function displayTableValues(countries){
+function displayTableValues(countries) {
 
-    console.log(countries)
-
+    // console.log(countries)
+    
+    // 
+    
     tableRows = countries.map((country, idx) => {
-        return `
+        console.log(typeof(displayProps(country.population)))
+            return `
         <tr>
-            <td>${idx} ${country.name}</td>
+            <td>${displayProps(country.name)}</td>
             <td>${displayProps(country.currencies)}</td>
             <td>${displayProps(country.languages)}</td>
-            <td>${country.population.toLocaleString()}</td>
-            <td>${country.area ? country.area.toLocaleString() : '---'}</td>
-            <td><img class="flag-container" src="${country.flag}" alt="the flag of ${country.name}"/></td>
+            <td>${parseInt(displayProps(country.population)).toLocaleString()}</td>
+            <td>${parseInt(displayProps(country.area)).toLocaleString()}</td>
+            <td><img class="flag-container" src="${displayProps(country.flag)}" alt="the flag of ${displayProps(country.name)}"/></td>
         </tr>`;
-    })
-    .join("");
+        })
+        .join("");
 
     document.querySelector("#data").innerHTML = tableRows;
 
 }
 
-
+// TODO: refactor this function. it can be done better
 displayProps = (countryProp) => {
     let tabl = [];
+
+    if (countryProp === null) {
+        tabl.push("---");
+    }
+
+    else if (typeof (countryProp) === 'object') {
         for (let prop in countryProp) {
-             let arr = countryProp[prop];
-            for (let anotherProp in arr) {
-                if (anotherProp === "name") {
-                    tabl.push(arr[anotherProp]);
-                    
+            for (let nestedProp in countryProp[prop]) {
+                if (nestedProp === "name") {
+                    tabl.push(countryProp[prop][nestedProp]);
                 }
-                
             }
         }
-        return tabl.join(",<br>");
+
+    } else {
+        tabl.push(countryProp);
     }
+
+    return tabl.join(",<br>");
+}
 
 
 
 // set max inp value dynamically + set min inp value
-const populationInputs = document.querySelectorAll(".num-inp");
+// const populationInputs = document.querySelectorAll(".num-inp");
 
-const maxPopulationArr = [];
-Array.from(rows).forEach(row => maxPopulationArr.push(row[3]));
+// const maxPopulationArr = [];
+// Array.from(rows).forEach(row => maxPopulationArr.push(row[3]));
 
 
-populationInputs.forEach(input => {
-    input.setAttribute("min", 0);
-    input.setAttribute("max", Math.max(...maxPopulationArr));
+// populationInputs.forEach(input => {
+//     input.setAttribute("min", 0);
+//     input.setAttribute("max", Math.max(...maxPopulationArr));
+// })
+
+
+
+// show results by keyword
+
+const min = document.querySelector("#min-population-inp").value;
+const max = document.querySelector("#max-population-inp").value;
+const keyword = document.querySelector("#keyword-inp").value.trim();
+
+document.querySelector("#cta").addEventListener("click", e => {
+    e.preventDefault();
+    getKeyword(rows);
+
+
+
+    // Array.from(rows).forEach(row => {
+    //     console.log(row);
+    //     row.textContent.toLowerCase().includes(keyword.toLowerCase()) ?
+    //         row.style.display = "table-row"
+    //         :
+    //         row.style.display = "none";
+    // })
+
+    // console.log(min)
+    // Array.from(rows).forEach((row, idx) => {
+    //     let populationTd = parseInt(row.children[3].innerText.replace(/\s/g, ""))
+    //     populationTd >= min && populationTd <= max ?
+    //         row.style.display = "table-row" 
+    //         :
+    //         row.style.display = "none"
+
+    // })
 })
+const getKeyword = rows => {
+    [...rows].forEach(row => {
+        console.log(row);
+        row.textContent.toLowerCase().includes(keyword.toLowerCase()) ?
+            row.style.display = "table-row" :
+            row.style.display = "none";
+    })
+}
 
+const getMinGetMax = rows => {
+    [...rows].forEach((row, idx) => {
+        let populationTd = parseInt(row.children[3].innerText.replace(/\s/g, ""))
+        populationTd >= min && populationTd <= max ?
+            row.style.display = "table-row" :
+            row.style.display = "none"
 
+    })
+}
 
-// // show results by keyword
-// document.querySelector("#cta").addEventListener("click", e => {
-//     e.preventDefault();
-    
-//     const keyword = document.querySelector("#keyword-inp").value.trim();
-    
-//     Array.from(rows).forEach(row => { 
-//         row.textContent.toLowerCase().includes(keyword.toLowerCase()) ?
-//             row.style.display = "table-row"
-//             :
-//             row.style.display = "none";
-//     })   
 
 
 //     // show results by keyword && values
@@ -90,5 +138,3 @@ populationInputs.forEach(input => {
 
 
 // })
-
-
