@@ -9,19 +9,17 @@ const rows = document.querySelector('tbody').children;
 
 function displayTableValues(countries) {
 
-    // console.log(countries)
-    
-    // 
+    console.log(countries)
     
     tableRows = countries.map((country, idx) => {
-        console.log(typeof(displayProps(country.population)))
+        
             return `
         <tr>
             <td>${displayProps(country.name)}</td>
             <td>${displayProps(country.currencies)}</td>
             <td>${displayProps(country.languages)}</td>
-            <td>${parseInt(displayProps(country.population)).toLocaleString()}</td>
-            <td>${parseInt(displayProps(country.area)).toLocaleString()}</td>
+            <td>${displayProps(country.population)}</td>
+            <td>${displayProps(country.area)}</td>
             <td><img class="flag-container" src="${displayProps(country.flag)}" alt="the flag of ${displayProps(country.name)}"/></td>
         </tr>`;
         })
@@ -33,13 +31,18 @@ function displayTableValues(countries) {
 
 // TODO: refactor this function. it can be done better
 displayProps = (countryProp) => {
+    // console.log(typeof(countryProp), countryProp)
     let tabl = [];
 
     if (countryProp === null) {
         tabl.push("---");
     }
 
-    else if (typeof (countryProp) === 'object') {
+    else if (countryProp === "number") {
+        tabl.push(parseInt(countryProp.toLocaleString()))
+    }
+
+    else if (typeof (countryProp) === "object") {
         for (let prop in countryProp) {
             for (let nestedProp in countryProp[prop]) {
                 if (nestedProp === "name") {
@@ -55,6 +58,22 @@ displayProps = (countryProp) => {
     return tabl.join(",<br>");
 }
 
+// FILTER BY KEYWORD
+
+const keyword = document.querySelector("#keyword-inp").value.trim();
+
+ document.querySelector("#cta").addEventListener("click", e => {
+        e.preventDefault();
+        filterByKeyword(keyword)
+});
+
+
+
+const filterByKeyword = keyword => {
+    // if (keyword ){}
+
+    // displayTableValues()
+}
 
 
 // set max inp value dynamically + set min inp value
@@ -73,13 +92,13 @@ displayProps = (countryProp) => {
 
 // show results by keyword
 
-const min = document.querySelector("#min-population-inp").value;
-const max = document.querySelector("#max-population-inp").value;
-const keyword = document.querySelector("#keyword-inp").value.trim();
+// const min = document.querySelector("#min-population-inp").value;
+// const max = document.querySelector("#max-population-inp").value;
+// const keyword = document.querySelector("#keyword-inp").value.trim();
 
-document.querySelector("#cta").addEventListener("click", e => {
-    e.preventDefault();
-    getKeyword(rows);
+// document.querySelector("#cta").addEventListener("click", e => {
+//     e.preventDefault();
+//     getKeyword(rows);
 
 
 
@@ -92,33 +111,34 @@ document.querySelector("#cta").addEventListener("click", e => {
     // })
 
     // console.log(min)
-    // Array.from(rows).forEach((row, idx) => {
-    //     let populationTd = parseInt(row.children[3].innerText.replace(/\s/g, ""))
-    //     populationTd >= min && populationTd <= max ?
-    //         row.style.display = "table-row" 
-    //         :
-    //         row.style.display = "none"
-
-    // })
-})
-const getKeyword = rows => {
-    [...rows].forEach(row => {
-        console.log(row);
-        row.textContent.toLowerCase().includes(keyword.toLowerCase()) ?
-            row.style.display = "table-row" :
-            row.style.display = "none";
-    })
-}
-
-const getMinGetMax = rows => {
-    [...rows].forEach((row, idx) => {
+    Array.from(rows).forEach((row, idx) => {
         let populationTd = parseInt(row.children[3].innerText.replace(/\s/g, ""))
         populationTd >= min && populationTd <= max ?
-            row.style.display = "table-row" :
+            row.style.display = "table-row" 
+            :
             row.style.display = "none"
 
     })
-}
+
+
+// const getKeyword = rows => {
+//     [...rows].forEach(row => {
+//         console.log(row);
+//         row.textContent.toLowerCase().includes(keyword.toLowerCase()) ?
+//             row.style.display = "table-row" :
+//             row.style.display = "none";
+//     })
+// }
+
+// const getMinGetMax = rows => {
+//     [...rows].forEach((row, idx) => {
+//         let populationTd = parseInt(row.children[3].innerText.replace(/\s/g, ""))
+//         populationTd >= min && populationTd <= max ?
+//             row.style.display = "table-row" :
+//             row.style.display = "none"
+
+//     })
+// }
 
 
 
