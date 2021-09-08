@@ -22,8 +22,8 @@
             
             <div class="input-box">
                 <input class="inp" type="text" id="keyword-inp" value="" name="" placeholder="Enter a keyword" required>
-                <input class="inp num-inp" type="number" id="min-population-inp" value="" name="" placeholder="Minimal population">
-                <input class="inp num-inp" type="number" id="max-population-inp" value="" name="" placeholder="Maximal population">
+                <input class="inp num-inp" type="number" id="min-population-inp" value="0" name="min" min="0" placeholder="Minimal population">
+                <input class="inp num-inp" type="number" id="max-population-inp" value="1000" name="max" max=""placeholder="Maximal population">
                 <button class="cta" id="cta">Search</button>
             </div>
 
@@ -34,11 +34,11 @@
                             <th colspan="6">Search result</th>
                         </tr>
                         <tr>
-                            <th>Name <div class="arrow"></div></th>
-                            <th>Currency</th>
-                            <th>Language</th>
-                            <th>Population</th>
-                            <th>Area</th>
+                            <th class="sortable">Name</th>
+                            <th class="sortable">Currency</th>
+                            <th class="sortable">Language</th>
+                            <th class="sortable">Population</th>
+                            <th class="sortable">Area</th>
                             <th>Flag</th>
                         </tr>
                     </thead>

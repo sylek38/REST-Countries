@@ -1,3 +1,4 @@
+@charset "UTF-8";
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -181,6 +182,25 @@ a {
 .dashboard__results * + * {
   margin-top: 1rem;
   text-align: left;
+}
+
+.table .sortable {
+  cursor: pointer;
+  background-color: #FFF;
+}
+.table .th-sort-asc::after {
+  content: "▴";
+}
+.table .th-sort-desc::after {
+  content: "▾";
+}
+.table .th-sort-asc::after,
+.table .th-sort-desc::after {
+  margin-left: 5px;
+}
+.table .th-sort-asc,
+.table .th-sort-desc {
+  background: rgba(204, 204, 255, 0.3);
 }
 
 /*# sourceMappingURL=styles.css.map */
