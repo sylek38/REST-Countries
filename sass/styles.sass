@@ -39,9 +39,10 @@ a
 
     .link
         padding: 1rem 2rem
-        border: 1px solid white
+        border: 2px solid white
         border-radius: 50px
         color: white
+        font-weight: 600
         transition: .25s
 
         &:hover
@@ -84,17 +85,17 @@ a
         padding: 1rem 2rem
         color: white
         background-color: #4a53cf
-        font-weight: 800
-        text-transform: uppercase
+        font-weight: 600
+        font-size: 1rem
+        // text-transform: uppercase
         letter-spacing: 1px
         cursor: pointer
         transition: .25s
         
 
         &:hover
-            background-color: white
-            color:#4a53cf
-            border-style: inset
+            background-color: #333bac
+            // border-style: inset
 
 @media (max-width: 820px)
     .input-box
@@ -104,10 +105,13 @@ a
         margin: auto
         padding: 1.5rem
 
-    // todo: change styles to make it min-width, less code 
+
+    // TODO: change styles to make it min-width, less code 
     .input-box * + *
         margin-left: 0
         margin-top: 1rem
+
+    
 
 
 // TABLE ---
@@ -189,12 +193,14 @@ a
     .sortable
         cursor: pointer
         background-color: #FFF
-    
+
     .th-sort-asc::after
         content: "\25b4"
+        color: black
     
     .th-sort-desc::after
         content: "\25be"
+        color: black
 
     .th-sort-asc::after,
     .th-sort-desc::after
