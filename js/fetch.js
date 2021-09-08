@@ -64,7 +64,7 @@ const rows = document.querySelector('tbody').children;
 function filterTable(keyword, min, max) {
 
     min = min ? parseInt(min) : 0;
-    max = max ? parseInt(max) : 1000000000;
+    max = max ? parseInt(max) : 1000000000000;
 
     console.log(min, max)
 
