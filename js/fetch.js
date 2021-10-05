@@ -1,5 +1,4 @@
 //fetch api
-
 const allCountries = "https://restcountries.com/v3.1/all";
 let countries;
 fetch(allCountries)
@@ -11,18 +10,18 @@ fetch(allCountries)
 
 function displayTable(countries) {
 
-    // console.log(countries)
+    console.log(countries)
 
     tableRows = countries.map((country, idx) => {
 
             return `
         <tr>
-            <td>${displayValues(country.name)}</td>
-            <td>${displayValues(country.currencies)}</td>
-            <td>${displayValues(country.languages)}</td>
-            <td>${displayValues(country.population)}</td>
-            <td>${displayValues(country.area)}</td>
-            <td><img class="flag-container" src="${displayValues(country.flag)}" alt="the flag of ${displayValues(country.name)}"/></td>
+            <td>${country.name.common}</td>
+            <td>${country.currencies ? displayCurrencies(country.currencies) : "no data"}</td>
+            <td>${country.languages ? displayLanguages(country.languages) : "no data"}</td>
+            <td>${country.population.toLocaleString()}</td>
+            <td>${country.area.toLocaleString()}</td>
+            <td><img class="flag-container" src="${displayFlag(country.flags)}" alt="the flag of ${country.name.common}"/></td>
         </tr>`;
         })
         .join("");
@@ -31,27 +30,37 @@ function displayTable(countries) {
 
 }
 
-displayValues = (countryProp) => {
-    let tabl = [];
+const displayCurrencies = (countryProp) => {
+    let currencies = [];
 
-    if (countryProp === null) {
-        tabl.push("---");
-    } else if (typeof (countryProp) === "number") {
-        tabl.push(countryProp.toLocaleString())
-    } else if (typeof (countryProp) === "object") {
         for (let prop in countryProp) {
             for (let nestedProp in countryProp[prop]) {
                 if (nestedProp === "name") {
-                    tabl.push(countryProp[prop][nestedProp]);
+                    currencies.push(countryProp[prop][nestedProp]);
                 }
             }
         }
 
-    } else {
-        tabl.push(countryProp);
+    return currencies.join(",<br>");
+}
+
+const displayLanguages = (countryProp) => {
+    let languages = [];
+
+    for (let prop in countryProp) {
+        languages.push(countryProp[prop]);
     }
 
-    return tabl.join(",<br>");
+    return languages.join(",<br>");
+
+}
+
+const displayFlag = (flagProp) => {
+    for (let prop in flagProp) {
+        if (prop === "svg") {
+            return flagProp[prop];
+        }
+    }
 }
 
 // TODO:
