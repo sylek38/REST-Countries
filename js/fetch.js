@@ -1,5 +1,6 @@
 //fetch api
-const allCountries = "https://restcountries.eu/rest/v2/all";
+
+const allCountries = "https://restcountries.com/v3.1/all";
 let countries;
 fetch(allCountries)
     .then(res => res.json())
