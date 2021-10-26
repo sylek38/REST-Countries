@@ -1,6 +1,8 @@
 //fetch api
 const allCountries = "https://restcountries.com/v3.1/all";
+const rows = document.querySelector('tbody').children;
 let countries;
+
 fetch(allCountries)
     .then(res => res.json())
     .then(data => {
@@ -10,17 +12,17 @@ fetch(allCountries)
 
 function displayTable(countries) {
 
-    console.log(countries)
-
+    // console.log(countries)
+    // ? displayArea(country.area) : "no data"
     tableRows = countries.map((country, idx) => {
 
             return `
         <tr>
             <td>${country.name.common}</td>
-            <td>${country.currencies ? displayCurrencies(country.currencies) : "no data"}</td>
-            <td>${country.languages ? displayLanguages(country.languages) : "no data"}</td>
-            <td>${country.population.toLocaleString()}</td>
-            <td>${country.area.toLocaleString()}</td>
+            <td>${country.currencies ? displayCurrencies(country.currencies) : "---"}</td>
+            <td>${country.languages ? displayLanguages(country.languages) : "---"}</td>
+            <td>${country.population}</td>
+            <td>${country.area}</td>
             <td><img class="flag-container" src="${displayFlag(country.flags)}" alt="the flag of ${country.name.common}"/></td>
         </tr>`;
         })
@@ -29,6 +31,10 @@ function displayTable(countries) {
     document.querySelector("#data").innerHTML = tableRows;
 
 }
+
+// const displayArea = (countryProp) => { 
+//     return countryProp.toLocaleString().replace(",", ".");
+// }
 
 const displayCurrencies = (countryProp) => {
     let currencies = [];
@@ -68,20 +74,18 @@ const displayFlag = (flagProp) => {
 
 // };
 
-const rows = document.querySelector('tbody').children;
-
 // FILTER BY KEYWORD
 function filterTable(keyword, min, max) {
 
     min = min ? parseInt(min) : 0;
     max = max ? parseInt(max) : 1000000000000;
 
-    console.log(min, max)
+    // console.log(min, max)
 
     //filter by keyword and min/max
     if (keyword !== "") {
 
-        console.log("keyword !== ''")
+        // console.log("keyword !== ''")
 
         Array.from(rows).forEach(row => {
             if (row.textContent.toLowerCase().includes(keyword.toLowerCase()) &&
@@ -100,7 +104,7 @@ function filterTable(keyword, min, max) {
         // filter by min/max
     } else {
 
-        console.log("keyword === ''")
+        // console.log("keyword === ''")
 
         Array.from(rows).forEach(row => {
             if (min <= parseInt(row.children[3].textContent.replace(/\D/g, '')) &&
@@ -134,14 +138,14 @@ function sortTableByColumn(table, column, asc = true, isNumeric) {
     const directionModifier = asc ? 1 : -1;
     const tBody = document.querySelector("#data");
 
-    // TODO: the Area column still doesn't work. "---" and float case (0,44, 346,36 or 2,02 for example)
     const sortedRows = Array.from(rows).sort((a, b) => {
         if (isNumeric) {
-            console.log(parseInt(a.querySelector(`td:nth-child(${column + 1})`).textContent.replace(/\D/g, '')))
-            const aColumnValue = parseInt(a.querySelector(`td:nth-child(${column + 1})`).textContent.replace(/\D/g, ''));
-            const bColumnValue = parseInt(b.querySelector(`td:nth-child(${column + 1})`).textContent.replace(/\D/g, ''));
 
-            return aColumnValue > bColumnValue ? (1 * directionModifier) : (-1 * directionModifier)
+            
+            a = parseInt(a.querySelector(`td:nth-child(${column + 1})`).textContent);
+            b = parseInt(b.querySelector(`td:nth-child(${column + 1})`).textContent);
+
+            return a > b ? (1 * directionModifier) : (-1 * directionModifier)
             
 
         } else {
