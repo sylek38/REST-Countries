@@ -187,6 +187,11 @@ a {
   cursor: pointer;
   background-color: #FFF;
 }
+.table .th-sort-default::after {
+  content: "▾";
+  color: black;
+  margin-left: 5px;
+}
 .table .th-sort-asc::after {
   content: "▴";
   color: black;
