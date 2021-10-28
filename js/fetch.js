@@ -1,6 +1,7 @@
 //fetch api
 const allCountries = "https://restcountries.com/v3.1/all";
 const rows = document.querySelector('tbody').children;
+const tableHeader = document.querySelector(".table-header > th");
 let countries;
 
 fetch(allCountries)
@@ -69,20 +70,41 @@ const displayFlag = (flagProp) => {
     }
 }
 
-// TODO:
-// getMaxPopulationValue = () => {
 
-// };
+const getMaxPopulationValue = () => {
+    let populationArray = [];
+    
+    Array.from(rows).forEach(row => {
+        populationArray.push(row.children[3].textContent)
+    })
+    
+    console.log(populationArray)
+    
+    return Math.max(...populationArray);
+};
 
-// FILTER BY KEYWORD
+// TODO: Add to DOMContentLoaded
+document.addEventListener("DOMContentLoaded", () => {
+    
+})
+    
+
+
+// FILTER TABLE BY KEYWORWD AND MIN/MAX
 function filterTable(keyword, min, max) {
 
     min = min ? parseInt(min) : 0;
-    max = max ? parseInt(max) : 1000000000000;
+    max = max ? parseInt(max) : parseInt(getMaxPopulationValue());
 
-    // console.log(min, max)
+    // TODO: show numbers of results every time sth changes
+    // const showNumberOfResults = () => {
+    //     let displayedRows = document.querySelectorAll("tr.visible");
+    //     // console.log(displayedRows.length)
+    //     tableHeader.textContent = `Search result (${displayedRows.length})`;
+    // }
+    
 
-    //filter by keyword and min/max
+    // Filter by keyword && min/max
     if (keyword !== "") {
 
         // console.log("keyword !== ''")
@@ -92,16 +114,18 @@ function filterTable(keyword, min, max) {
                 min <= parseInt(row.children[3].textContent.replace(/\D/g, '')) &&
                 max >= parseInt(row.children[3].textContent.replace(/\D/g, ''))) {
 
-                row.style.display = "table-row"
+                row.style.display = "table-row";
+                row.classList.add("visible");
 
             } else {
 
                 row.style.display = "none";
 
             }
+
         });
 
-        // filter by min/max
+    // Filter only by min/max
     } else {
 
         // console.log("keyword === ''")
@@ -111,15 +135,20 @@ function filterTable(keyword, min, max) {
                 max >= parseInt(row.children[3].textContent.replace(/\D/g, ''))) {
 
                 row.style.display = "";
+                row.classList.add("visible");
 
             } else {
 
                 row.style.display = "none";
 
             }
+            
         });
+        
     }
 
+    // Show number of displayed rows:
+    
 }
 
 document.querySelector("#cta").addEventListener("click", e => {
@@ -142,16 +171,16 @@ function sortTableByColumn(table, column, asc = true, isNumeric) {
         if (isNumeric) {
 
             
-            a = parseInt(a.querySelector(`td:nth-child(${column + 1})`).textContent);
-            b = parseInt(b.querySelector(`td:nth-child(${column + 1})`).textContent);
+            const aColumnValue = parseInt(a.querySelector(`td:nth-child(${column + 1})`).textContent);
+            const bColumnValue = parseInt(b.querySelector(`td:nth-child(${column + 1})`).textContent);
 
-            return a > b ? (1 * directionModifier) : (-1 * directionModifier)
+            return aColumnValue > bColumnValue ? (1 * directionModifier) : (-1 * directionModifier)
             
 
         } else {
 
-            const aColumnValue = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-            const bColumnValue = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            const aColumnValue = a.querySelector(`td:nth-child(${column + 1})`).textContent.toLowerCase().trim();
+            const bColumnValue = b.querySelector(`td:nth-child(${column + 1})`).textContent.toLowerCase().trim();
 
             return aColumnValue > bColumnValue ? (1 * directionModifier) : (-1 * directionModifier)
         }
