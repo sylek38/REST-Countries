@@ -89,6 +89,10 @@ function setDashboard(countries) {
 
         return findFiveMostCommon(allCountsOfElements);
     }
+
+    const averagePopulation = () => {
+        
+    }
            
     paragraph1.textContent += numberOfCountries();
     paragraph2.textContent += mostCommonLanguages().join(", ");
