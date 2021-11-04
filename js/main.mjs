@@ -4,22 +4,21 @@ import * as Sort from "./modules/sort.mjs";
 import * as Fetch from "./modules/fetch.mjs";
 
 
-// const countriesURL = "https://restcountries.com/v3.1/all";
+const countriesURL = "https://restcountries.com/v3.1/all";
 
 const rows = document.querySelector('tbody').children;
-let countries = Fetch.getCountriesInfo();
+let countries;
 
 // TODO: FIX FETCH
 
-// fetch(countriesURL)
-//     .then(res => res.json())
-//     .then(data => {
-//         countries = data;
-//         displayTable(countries);
-//     })
+fetch(countriesURL)
+    .then(res => res.json())
+    .then(data => {
+        countries = data;
+        displayTable(countries);
+    })
 
 function displayTable() {
-
     const populatedRows = countries.map((country, idx) => {
 
             return `
@@ -47,8 +46,6 @@ const displayLanguages = (languages) => {
     return Helpers.getLanguages(languages).join(",<br>");
 }
 
-
-
 // FILTER TABLE
 document.querySelector("#cta").addEventListener("click", e => {
     e.preventDefault();
@@ -59,7 +56,7 @@ document.querySelector("#cta").addEventListener("click", e => {
     Filter.filterTable(keyword, min, max)
 });
 
-// ------------- SORT TABLE ------------- 
+// SORT TABLE
 document.querySelectorAll(".table th.sortable").forEach(th => {
     th.addEventListener("click", () => {
         const tableElement = th.parentElement.parentElement.parentElement;

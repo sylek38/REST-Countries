@@ -1,9 +1,4 @@
-// a) total number of countries
-// b) top 5 most common languages
-// c) top 5 most common currencies
-// d) avg population
-// e) avg area
-// f) avg number of neigbours
+import * as Helpers from "./modules/helpers.mjs";
 
 const countriesURL = "https://restcountries.com/v3.1/all";
 
@@ -14,16 +9,24 @@ fetch(countriesURL)
     .then(res => res.json())
     .then(data => {
         countries = data;
-        setDashboard(countries)
-        console.log(countries)
+        displayDashboardInfo(countries);
     })
 
-function setDashboard(countries) {
+function displayDashboardInfo(countries) {
+    const dashboard = document.querySelector("#dashboard");
     const paragraph1 = dashboard.querySelector("li:nth-child(1)");
     const paragraph2 = dashboard.querySelector("li:nth-child(2)");
     const paragraph3 = dashboard.querySelector("li:nth-child(3)");
     const paragraph4 = dashboard.querySelector("li:nth-child(4)");
     const paragraph5 = dashboard.querySelector("li:nth-child(5)");
+
+    paragraph1.textContent += numberOfCountries();
+    paragraph2.textContent += mostCommonLanguages().join(", ");
+    paragraph3.textContent += mostCommonCurrencies().join(", ");
+    paragraph4.textContent += averagePopulation().toFixed(0);
+    paragraph5.textContent += averageArea().toFixed(0);
+
+}
 
     const numberOfCountries = () => {
         return countries.length
@@ -62,13 +65,10 @@ function setDashboard(countries) {
 
     const mostCommonLanguages = () => {
         let allCountsOfElements = [];
-
-        // znalezienie wszystkich języków, tyle razy ile występują
+        
         countries.forEach(country => {
-            for (let prop in country.languages) {
-                allCountsOfElements.push(country.languages[prop])
-            }
-        })
+            allCountsOfElements.push(Helpers.getLanguages(country.languages));
+        });
 
         return findFiveMostCommon(allCountsOfElements);
     }
@@ -76,26 +76,37 @@ function setDashboard(countries) {
     const mostCommonCurrencies = () => {
         let allCountsOfElements = [];
 
-        // znalezienie wszystkich języków, tyle razy ile występują
         countries.forEach(country => {
-            for (let prop in country.currencies) {
-                for (let nestedProp in country.currencies[prop]) {
-                    if (nestedProp === "name") {
-                        allCountsOfElements.push(country.currencies[prop][nestedProp])
-                    }
-                }
-            }
-        })
+            allCountsOfElements.push(Helpers.getCurrencies(country.currencies));
+        });
 
         return findFiveMostCommon(allCountsOfElements);
     }
 
+    const getAverage = (elements) => {
+        return elements.reduce((avg, value) => {
+            return avg + value;
+        }, 0) / elements.length;
+    }
+
     const averagePopulation = () => {
-        
+        let allCountsOfElements = [];
+
+        countries.forEach(country => {
+            allCountsOfElements.push(country.population);
+        })
+
+        return getAverage(allCountsOfElements);
+    }
+
+    const averageArea = () => {
+        let allCountsOfElements = [];
+
+        countries.forEach(country => {
+            allCountsOfElements.push(country.area);
+        })
+
+        return getAverage(allCountsOfElements);
     }
            
-    paragraph1.textContent += numberOfCountries();
-    paragraph2.textContent += mostCommonLanguages().join(", ");
-    paragraph3.textContent += mostCommonCurrencies().join(", ");;
-
-    }
+   
