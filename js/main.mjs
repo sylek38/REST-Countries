@@ -5,7 +5,7 @@ import * as Sort from "./modules/sort.mjs";
 
 const countriesURL = "https://restcountries.com/v3.1/all";
 
-const rows = document.querySelector('tbody').children;
+const rows = document.querySelector("#data").children;
 let countries;
 
 // TODO: FIX FETCH
@@ -18,7 +18,7 @@ fetch(countriesURL)
     })
 
 function displayTable() {
-    const populatedRows = countries.map((country, idx) => {
+    const populatedRows = countries.map((country) => {
 
             return `
         <tr>
@@ -51,7 +51,7 @@ document.querySelector("#cta").addEventListener("click", e => {
     const max = document.querySelector("#max-population-inp").value;
     const keyword = document.querySelector("#keyword-inp").value.trim();
 
-    Filter.filterTable(keyword, min, max)
+    Filter.filterTable(keyword, min, max);
 });
 
 // SORT TABLE
@@ -66,4 +66,4 @@ document.querySelectorAll(".table th.sortable").forEach(th => {
     })
 })
 
-export { rows }
+export { rows };

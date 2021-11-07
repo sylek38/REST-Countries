@@ -4,7 +4,7 @@ const getMaxPopulationValue = () => {
     let populationArray = [];
     
     Array.from(rows).forEach(row => {
-        populationArray.push(row.children[3].textContent)
+        populationArray.push(row.children[3].textContent);
     })
     
     return Math.max(...populationArray);
@@ -23,7 +23,7 @@ const filterTable = (keyword, min, max) => {
                 min <= parseInt(row.children[3].textContent.replace(/\D/g, '')) &&
                 max >= parseInt(row.children[3].textContent.replace(/\D/g, ''))) {
 
-                row.style.display = "table-row";
+                row.style.display = "";
                 row.classList.add("visible");
 
             } else {

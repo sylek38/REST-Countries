@@ -32,4 +32,4 @@ const getFlags = (flagProp) => {
     }
 }
 
-export { getLanguages, getCurrencies, getFlags }
+export { getLanguages, getCurrencies, getFlags };
