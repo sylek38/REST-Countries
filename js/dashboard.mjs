@@ -1,8 +1,8 @@
 import * as Helpers from "./modules/helpers.mjs";
+import * as MostCommon from "./modules/mostCommon.mjs";
 
 const countriesURL = "https://restcountries.com/v3.1/all";
-
-const dashboard = document.querySelector(".dashboard__results");
+const dashboard = document.querySelector("#dashboard");
 let countries = "";
 
 fetch(countriesURL)
@@ -13,54 +13,31 @@ fetch(countriesURL)
 })
 
 function displayDashboardInfo() {
-    const dashboard = document.querySelector("#dashboard");
-    const paragraph1 = dashboard.querySelector("li:nth-child(1)");
-    const paragraph2 = dashboard.querySelector("li:nth-child(2)");
-    const paragraph3 = dashboard.querySelector("li:nth-child(3)");
-    const paragraph4 = dashboard.querySelector("li:nth-child(4)");
-    const paragraph5 = dashboard.querySelector("li:nth-child(5)");
 
-    paragraph1.textContent += numberOfCountries();
-    paragraph2.textContent += mostCommonLanguages().join(", ");
-    paragraph3.textContent += mostCommonCurrencies().join(", ");
-    paragraph4.textContent += averagePopulation().toFixed(0);
-    paragraph5.textContent += averageArea().toFixed(0);
+    const paragraph1 = document.createElement("p");
+    paragraph1.textContent += `Total number of countries: ${numberOfCountries()}`;
+    dashboard.appendChild(paragraph1);
+
+    const paragraph2 = document.createElement("p");
+    paragraph2.textContent += `Top 5 most common languages: ${mostCommonLanguages().join(", ")}`;
+    dashboard.appendChild(paragraph2);
+
+    const paragraph3 = document.createElement("p");
+    paragraph3.textContent += `Top 5 most common currencies: ${mostCommonCurrencies().join(", ")}`;
+    dashboard.appendChild(paragraph3);
+
+    const paragraph4 = document.createElement("p");
+    paragraph4.textContent += `Average population: ${averageArea().toFixed(0)}`;
+    dashboard.appendChild(paragraph4);
+
+    const paragraph5 = document.createElement("p");
+    paragraph5.textContent += `Average area: ${averagePopulation().toFixed(0)}`;
+    dashboard.appendChild(paragraph5);
 
 }
 
     const numberOfCountries = () => {
         return countries.length
-    }
-
-    const findFiveMostCommon = (allCountsOfElements) => {
-
-        // usunięcie duplikatów, dodanie ilości powtórzeń
-        const hashMap = allCountsOfElements.reduce((acc, val) => {
-            acc[val] = (acc[val] || 0) + 1
-            return acc
-        }, {})
-
-        const fiveMostCommon = [];
-
-        // znalezienie most common elementu
-        for (let i = 1; i <= 5; i++) {
-            const currentMostCommon = 
-                Object.keys(hashMap)
-                .reduce((a, b) => hashMap[a] > hashMap[b] ? a : b)
-            
-            fiveMostCommon.push(currentMostCommon);
-
-            // usuniecie most common elementu ze starej listy (by zrobilo się miejsce na nowy)
-            Object.keys(hashMap).forEach(key => {
-                if (key === (fiveMostCommon[fiveMostCommon.length - 1])) {
-                    delete hashMap[key];
-                }
-            });
-            
-        }
-    
-        return fiveMostCommon;
-
     }
 
     const mostCommonLanguages = () => {
@@ -70,7 +47,7 @@ function displayDashboardInfo() {
             allCountsOfElements.push(Helpers.getLanguages(country.languages));
         });
 
-        return findFiveMostCommon(allCountsOfElements);
+        return MostCommon.findFiveMostCommon(allCountsOfElements);
     }
 
     const mostCommonCurrencies = () => {
@@ -80,7 +57,7 @@ function displayDashboardInfo() {
             allCountsOfElements.push(Helpers.getCurrencies(country.currencies));
         });
 
-        return findFiveMostCommon(allCountsOfElements);
+        return MostCommon.findFiveMostCommon(allCountsOfElements);
     }
 
     const getAverage = (elements) => {
@@ -108,5 +85,3 @@ function displayDashboardInfo() {
 
         return getAverage(allCountsOfElements);
     }
-           
-   

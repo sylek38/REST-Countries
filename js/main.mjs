@@ -1,7 +1,6 @@
 import * as Helpers from "./modules/helpers.mjs";
 import * as Filter from "./modules/filter.mjs";
 import * as Sort from "./modules/sort.mjs";
-import * as Fetch from "./modules/fetch.mjs";
 
 
 const countriesURL = "https://restcountries.com/v3.1/all";
