@@ -48,7 +48,6 @@ const displayLanguages = (languages) => {
 
 // FILTER TABLE
 document.querySelector("#cta").addEventListener("click", e => {
-    e.preventDefault();
     const min = document.querySelector("#min-population-inp").value;
     const max = document.querySelector("#max-population-inp").value;
     const keyword = document.querySelector("#keyword-inp").value.trim();

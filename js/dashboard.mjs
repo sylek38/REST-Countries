@@ -9,10 +9,10 @@ fetch(countriesURL)
     .then(res => res.json())
     .then(data => {
         countries = data;
-        displayDashboardInfo(countries);
-    })
+        displayDashboardInfo();
+})
 
-function displayDashboardInfo(countries) {
+function displayDashboardInfo() {
     const dashboard = document.querySelector("#dashboard");
     const paragraph1 = dashboard.querySelector("li:nth-child(1)");
     const paragraph2 = dashboard.querySelector("li:nth-child(2)");

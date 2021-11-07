@@ -165,7 +165,8 @@ a {
   }
 }
 .dashboard {
-  max-width: 50%;
+  max-width: 70vw;
+  width: 100%;
   margin: auto;
   margin-top: 3rem;
   padding: 3rem;
@@ -183,6 +184,11 @@ a {
   text-align: left;
 }
 
+@media (max-width: 820px) {
+  .dashboard {
+    max-width: 90vw;
+  }
+}
 .table .sortable {
   cursor: pointer;
   background-color: #FFF;
