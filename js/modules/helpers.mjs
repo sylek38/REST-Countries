@@ -19,7 +19,7 @@ const getLanguages = (countryProp) => {
     for (let prop in countryProp) {
         languages.push(countryProp[prop]);
     }
-
+    
     return languages;
 
 }

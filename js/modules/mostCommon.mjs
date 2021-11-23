@@ -1,16 +1,17 @@
 const findFiveMostCommon = (allCountsOfElements) => {
+    const fiveMostCommon = [];
 
     const hashMap = allCountsOfElements.reduce((acc, val) => {
         acc[val] = (acc[val] || 0) + 1
         return acc
-    }, {})
+    }, {});
 
-    const fiveMostCommon = [];
+    console.log(hashMap);
 
     for (let i = 1; i <= 5; i++) {
         const currentMostCommon = 
             Object.keys(hashMap)
-            .reduce((a, b) => hashMap[a] > hashMap[b] ? a : b)
+            .reduce((a, b) => hashMap[a] > hashMap[b] ? a : b);
         
         fiveMostCommon.push(currentMostCommon);
 

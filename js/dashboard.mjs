@@ -36,52 +36,52 @@ function displayDashboardInfo() {
 
 }
 
-    const numberOfCountries = () => {
-        return countries.length
-    }
+const numberOfCountries = () => {
+    return countries.length
+}
 
-    const mostCommonLanguages = () => {
-        let allCountsOfElements = [];
-        
-        countries.forEach(country => {
-            allCountsOfElements.push(Helpers.getLanguages(country.languages));
-        });
+const mostCommonLanguages = () => {
+    let allCountsOfElements = [];
+    
+    countries.forEach(country => {
+        allCountsOfElements.push(Helpers.getLanguages(country.languages));
+    });
 
-        return MostCommon.findFiveMostCommon(allCountsOfElements);
-    }
+    return MostCommon.findFiveMostCommon(allCountsOfElements);
+}
 
-    const mostCommonCurrencies = () => {
-        let allCountsOfElements = [];
+const mostCommonCurrencies = () => {
+    let allCountsOfElements = [];
 
-        countries.forEach(country => {
-            allCountsOfElements.push(Helpers.getCurrencies(country.currencies));
-        });
+    countries.forEach(country => {
+        allCountsOfElements.push(Helpers.getCurrencies(country.currencies));
+    });
 
-        return MostCommon.findFiveMostCommon(allCountsOfElements);
-    }
+    return MostCommon.findFiveMostCommon(allCountsOfElements);
+}
 
-    const getAverage = (elements) => {
-        return elements.reduce((avg, value) => {
-            return avg + value;
-        }, 0) / elements.length;
-    }
+const getAverage = (elements) => {
+    return elements.reduce((avg, value) => {
+        return avg + value;
+    }, 0) / elements.length;
+}
 
-    const averagePopulation = () => {
-        let allCountsOfElements = [];
+const averagePopulation = () => {
+    let allCountsOfElements = [];
 
-        countries.forEach(country => {
-            allCountsOfElements.push(country.population);
-        })
+    countries.forEach(country => {
+        allCountsOfElements.push(country.population);
+    })
 
-        return getAverage(allCountsOfElements);
-    }
+    return getAverage(allCountsOfElements);
+}
 
-    const averageArea = () => {
-        let allCountsOfElements = [];
+const averageArea = () => {
+    let allCountsOfElements = [];
 
-        countries.forEach(country => {
-            allCountsOfElements.push(country.area);
-        })
+    countries.forEach(country => {
+        allCountsOfElements.push(country.area);
+    })
 
-        return getAverage(allCountsOfElements);
-    }
+    return getAverage(allCountsOfElements);
+}

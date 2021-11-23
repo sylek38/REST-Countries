@@ -19,8 +19,7 @@ fetch(countriesURL)
 
 function displayTable() {
     const populatedRows = countries.map((country) => {
-
-            return `
+        return `
         <tr>
             <td>${country.name.common}</td>
             <td>${country.currencies ? displayCurrencies(country.currencies) : "---"}</td>
