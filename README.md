@@ -6,6 +6,8 @@ You can filter the information by **keyword, minimal and maximal value**, the ta
 
 As you can see, some visual aspects are still in progress :nail_care:
 
+I used pure JS without any libraries for the table on purpose.
+
 Countries information come from an API ---> https://restcountries.com
 
 Demo ---> https://laughing-nobel-ea0d4a.netlify.app
